@@ -128,6 +128,13 @@ void inserirElemento()
 	cin >> novo->valor;
 	novo->prox = NULL;
 
+	NO* Jaexiste = posicaoElemento(novo->valor);
+	if (Jaexiste != NULL)
+	{
+		cout << "esse valor já existe";
+		return;
+	}
+
 	if (primeiro == NULL)
 	{
 		primeiro = novo;
@@ -145,20 +152,65 @@ void inserirElemento()
 
 void excluirElemento()
 {
+	int del;
+	cout << "digite ";
+	cin >> del;
+	NO* delet = posicaoElemento(del);
+	if (delet == primeiro)
+	{
+		primeiro = primeiro->prox;
+	}
+		
+	else if (delet != NULL)
+	{
+		NO* aux = primeiro;
+		while (aux->prox  != delet) {
+			
+			aux = aux->prox;
+			
+		}
+				
+		aux->prox = delet->prox;
+
+		free(delet);
+
+	}
+
+
+
+	else
+	{
+		return;
+	}
 	
 }
 
 void buscarElemento()
 {
+	int numero;
+	cout << "DIGITE: ";
+	cin >> numero ;
+	if (posicaoElemento(numero) == NULL)
+	{
+		cout << "num tem    ";
+
+	}
+
+	else
+	{
+		cout << " tem  ";
+	}
 	
 }
+	
 
+	
 
 
 // retorna um ponteiro para o elemento buscado
 // ou NULL se o elemento não estiver na lista
-NO* posicaoElemento(int numero)
-{
+	NO* posicaoElemento(int numero)
+	{
 	NO* aux = primeiro;
 	while (aux != NULL) {
 		if (aux->valor == numero)
@@ -168,4 +220,4 @@ NO* posicaoElemento(int numero)
 		aux = aux->prox;
 	}
 	return aux;
-}
+	}
